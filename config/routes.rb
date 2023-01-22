@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :posts do
+    member do
+      delete :delete_attachment
+    end
+  end
   # get 'home/index'
   root 'home#index'
   get 'home/about'
