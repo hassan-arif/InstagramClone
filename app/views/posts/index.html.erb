@@ -1,27 +1,38 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Posts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= link_to "Create Post", new_post_path, class:"btn btn-primary" %>
+<br/>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.description %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @posts.reverse_each do |post| %>
+  <br/>
+  <div class="card">
+    <div class="card-header">
+      Post
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p><%= post.description %></p>
 
-<br>
+        <div class="row">
+            <% post.images.each do |im| %>
+              <div class="col-sm-3 my-2">
+                <%= image_tag(im, style:"width:100%") %>
+              </div>
+            <% end %>
+        </div>
 
-<%= link_to 'New Post', new_post_path %>
+        <br/>
+        <footer class="blockquote-footer">
+
+          <cite>
+          <%= link_to 'Show', post, class:"btn btn-secondary" %>
+          <%= link_to 'Edit', edit_post_path(post), class:"btn btn-secondary" %>
+          <%= link_to 'Delete', post, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+          </cite>
+
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+<% end %>

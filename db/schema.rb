@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 2023_01_22_053306) do
+ActiveRecord::Schema.define(version: 2023_01_24_144454) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 2023_01_22_053306) do
 
   create_table "posts", force: :cascade do |t|
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.string "line"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

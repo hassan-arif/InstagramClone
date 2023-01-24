@@ -1,0 +1,33 @@
+<h1>Stories</h1>
+
+<%= link_to "Create Story", new_story_path, class:"btn btn-primary" %>
+<br/>
+
+<% @stories.reverse_each do |story| %>
+  <br/>
+  <div class="card">
+    <div class="card-header">
+      <p>Story created <%= distance_of_time_in_words(story.created_at, Time.now) %> ago</p>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p><%= story.line %></p>
+
+
+        <% if story.image.attached? %>
+          <div style="width:400px;height:auto">
+            <%= image_tag(story.image, style:"width:100%") %>
+          </div>
+        <% end %>
+
+        <br/>
+        <footer class="blockquote-footer">
+
+          <%= link_to 'Show', story, class:"btn btn-secondary" %>
+          <%= link_to 'Delete', story, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+<% end %>
