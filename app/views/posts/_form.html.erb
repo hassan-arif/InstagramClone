@@ -34,6 +34,10 @@
     <%= form.file_field :images, multiple: true %>
   </div>
 
+  <div class="field mb-3">
+    <%= form.number_field :user_id, id: :post_user_id, value:current_user.id, type: :hidden %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

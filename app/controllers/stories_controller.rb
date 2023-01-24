@@ -1,5 +1,7 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: %i[ show destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:destroy]
 
   # GET /stories
   def index
@@ -12,12 +14,14 @@ class StoriesController < ApplicationController
 
   # GET /stories/new
   def new
-    @story = Story.new
+    # @story = Story.new
+    @story = current_user.stories.build
   end
 
   # POST /stories
   def create
-    @story = Story.new(story_params)
+    # @story = Story.new(story_params)
+    @story = current_user.stories.build(story_params)
 
     respond_to do |format|
       if @story.save
@@ -40,6 +44,11 @@ class StoriesController < ApplicationController
     end
   end
 
+  def correct_user
+    @story = current_user.stories.find_by(id: params[:id])
+    redirect_to stories_path, notice: "Not Authorized To Edit This Story" if @story.nil?
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_story
@@ -48,7 +57,7 @@ class StoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def story_params
-      params.require(:story).permit(:line, :image)
+      params.require(:story).permit(:line, :image, :user_id)
     end
 
 end

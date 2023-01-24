@@ -1,38 +1,46 @@
+<% if user_signed_in? %>
 
-<h1>Posts</h1>
+  <h1>Posts</h1>
 
-<%= link_to "Create Post", new_post_path, class:"btn btn-primary" %>
-<br/>
-
-<% @posts.reverse_each do |post| %>
+  <%= link_to "Create Post", new_post_path, class:"btn btn-primary" %>
   <br/>
-  <div class="card">
-    <div class="card-header">
-      Post
-    </div>
-    <div class="card-body">
-      <blockquote class="blockquote mb-0">
-        <p><%= post.description %></p>
 
-        <div class="row">
-            <% post.images.each do |im| %>
-              <div class="col-sm-3 my-2">
-                <%= image_tag(im, style:"width:100%") %>
-              </div>
-            <% end %>
+  <% @posts.reverse_each do |post| %>
+    <% if post.user == current_user %>
+      <br/>
+      <div class="card">
+        <div class="card-header">
+          <p>Post created <%= distance_of_time_in_words(post.created_at, Time.now) %> ago</p>
         </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p><%= post.description %></p>
 
-        <br/>
-        <footer class="blockquote-footer">
+            <div class="row">
+                <% post.images.each do |im| %>
+                  <div class="col-sm-3 my-2">
+                    <%= image_tag(im, style:"width:100%") %>
+                  </div>
+                <% end %>
+            </div>
 
-          <cite>
-          <%= link_to 'Show', post, class:"btn btn-secondary" %>
-          <%= link_to 'Edit', edit_post_path(post), class:"btn btn-secondary" %>
-          <%= link_to 'Delete', post, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-          </cite>
+            <br/>
+            <footer class="blockquote-footer">
 
-        </footer>
-      </blockquote>
-    </div>
-  </div>
+              <cite>
+              <%= link_to 'Show', post, class:"btn btn-secondary" %>
+              <%= link_to 'Edit', edit_post_path(post), class:"btn btn-secondary" %>
+              <%= link_to 'Delete', post, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+              </cite>
+
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+<% else %>
+  <h1>Hello, World!</h1>
+  <p>You're not signed in..</p>
 <% end %>

@@ -1,33 +1,42 @@
-<h1>Stories</h1>
+<% if user_signed_in? %>
 
-<%= link_to "Create Story", new_story_path, class:"btn btn-primary" %>
-<br/>
+  <h1>Stories</h1>
 
-<% @stories.reverse_each do |story| %>
+  <%= link_to "Create Story", new_story_path, class:"btn btn-primary" %>
   <br/>
-  <div class="card">
-    <div class="card-header">
-      <p>Story created <%= distance_of_time_in_words(story.created_at, Time.now) %> ago</p>
-    </div>
-    <div class="card-body">
-      <blockquote class="blockquote mb-0">
-        <p><%= story.line %></p>
+
+  <% @stories.reverse_each do |story| %>
+    <% if story.user == current_user %>
+      <br/>
+      <div class="card">
+        <div class="card-header">
+          <p>Story created <%= distance_of_time_in_words(story.created_at, Time.now) %> ago</p>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p><%= story.line %></p>
 
 
-        <% if story.image.attached? %>
-          <div style="width:400px;height:auto">
-            <%= image_tag(story.image, style:"width:100%") %>
-          </div>
-        <% end %>
+            <% if story.image.attached? %>
+              <div style="width:400px;height:auto">
+                <%= image_tag(story.image, style:"width:100%") %>
+              </div>
+            <% end %>
 
-        <br/>
-        <footer class="blockquote-footer">
+            <br/>
+            <footer class="blockquote-footer">
 
-          <%= link_to 'Show', story, class:"btn btn-secondary" %>
-          <%= link_to 'Delete', story, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Show', story, class:"btn btn-secondary" %>
+              <%= link_to 'Delete', story, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
 
-        </footer>
-      </blockquote>
-    </div>
-  </div>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+<% else %>
+  <h1>Hello, World!</h1>
+  <p>You're not signed in..</p>
 <% end %>

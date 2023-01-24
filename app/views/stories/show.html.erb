@@ -5,9 +5,12 @@
 <div style="width:400px;height:auto">
   <% if @story.image.attached? %>
     <%= image_tag(@story.image, style:"width:100%") %>
-    <br/><br/>
+    <br/>
   <% end %>
 </div>
+<p>
+  <p>Story created <%= distance_of_time_in_words(@story.created_at, Time.now) %> ago</p>
+</p>
 
 <%= link_to 'Edit', edit_story_path(@story) %> |
 <%= link_to 'Back', stories_path %>

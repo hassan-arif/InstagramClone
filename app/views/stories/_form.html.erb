@@ -21,6 +21,10 @@
     <%= form.file_field :image %>
   </div>
 
+  <div class="field mb-3">
+    <%= form.number_field :user_id, id: :story_user_id, value:current_user.id, type: :hidden %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
