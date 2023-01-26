@@ -1,24 +1,37 @@
-# README
+![Banner](Screenshots/banner.png)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Basic Rails Web Application for Instagram Clone which connects multiple Users.
 
-Things you may want to cover:
+---
+## Intallation
 
-* Ruby version
+- OS: Ubuntu 20.04 (Linux)
+- Follow this [link](https://gist.github.com/ziaulrehman40/16445c56e3f7bc7d1dece245fb61cf8e) to set up Ruby (2.7.6) and Rails (major 5.2), including their related components.
 
-* System dependencies
+> No need to install postgres as sqlite is used for this app which is preinstalled on Ubuntu.
 
-* Configuration
+- After everything is set:
+1. Enter this on your terminal:
 
-* Database creation
+```bash
+rails server
+```
 
-* Database initialization
+2. Search `localhost:3000` on your browser to access the application.
 
-* How to run the test suite
+---
+## Functionalities
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Signup, Login, and Account Editing/Cancellation (`Devise` Gem).
+![Registration](Screenshots/reg.png)
+![Editing Profile](Screenshots/acc.png)
 
-* Deployment instructions
+2. Upload Posts and/or Stories
+![Post](Screenshots/post.png)
+![Story](Screenshots/story.png)
 
-* ...
+---
+## Pending Functionalities
+3. Add Comments and/or Likes.
+4. Follow each other.
+5. Private/Public Account.
